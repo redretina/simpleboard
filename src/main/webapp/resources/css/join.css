@@ -1,0 +1,13 @@
+@charset "UTF-8";
+.phone {
+	width: 5.0em;
+	display: inline;
+}
+
+.join_list li {
+	margin: 1.0em;
+}
+
+#message {
+	color: red;
+}

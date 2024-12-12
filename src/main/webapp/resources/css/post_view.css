@@ -1,0 +1,21 @@
+@charset "UTF-8";
+
+.btn_area {
+	display: flex;
+}
+
+.btn_area ul {
+	display: flex;
+	flex-direction: row;
+	margin-left: auto!important;
+	list-style: none;
+}
+
+.btn_area li {
+	margin: 0.2em;
+	display: list-item;
+}
+
+.message_area {
+	color: red;
+}

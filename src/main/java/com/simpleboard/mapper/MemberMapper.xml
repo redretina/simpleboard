@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.simpleboard.mapper.MemberMapper">
+	<insert id="insertMember">
+		insert into member values(#{id},#{password},#{username},#{name},#{phone},#{email},sysdate,null,0)
+	</insert>
+	<update id="updateMember">
+		update member
+		<set>
+			<if test="password!=null and password!=''">
+			password=#{password},
+			</if>
+			<if test="username!=null and username!=''">
+			username=#{username},
+			</if>
+			<if test="name!=null and name!=''">
+			name=#{name},
+			</if>
+			<if test="phone!=null and phone!=''">
+			phone=#{phone},
+			</if>
+			<if test="email!=null and email!=''">
+			email=#{email},
+			</if>
+			<if test="lastlogin!=null and lastlogin!=''">
+			lastlogin=TO_DATE(#{lastlogin}, 'yyyy-mm-dd HH24:mi:ss'),
+			</if>
+			<if test="state!=null and state!=0">
+			state=#{state}
+			</if>
+		</set>
+		where id = #{id}
+	</update>
+	<update id="deleteMember">
+		update member set state=2 where id=#{id} 
+	</update>
+	<select id="selectMemberById" resultType="Member">
+		select * from member where id = #{id}
+	</select>
+	<select id="selectMemberByUsername" resultType="Member">
+		select * from member where username = #{username}
+	</select>
+	<select id="selectPostCountById" resultType="int">
+		select count(*) from post where writer = #{id} and state = 1
+	</select>
+	<select id="selectReplyCountById" resultType="int">
+		select count(*) from reply where writer = #{id} and state = 1
+	</select>
+	<update id="updateLastLogin">
+		update member set lastlogin = sysdate where id = #{id}
+	</update>
+	<select id="selectStatenameById" resultType="String">
+		select memberstate.state from member left outer join memberstate on member.state = memberstate.num
+			where member.id=#{id}
+	</select>
+	<select id="selectMemberCount" resultType="int">
+		select count(*) from member where state=1
+	</select>
+	<select id="selectAllMemberList" resultType="Member">
+		select mtemp.* from (select rownum rn, temp.* from
+			(select member.*, memberstate.state as statename
+				from member left outer join memberstate on member.state = memberstate.num
+				where member.state != 9 order by member.id desc) temp) mtemp
+			where mtemp.rn between #{startRow} and #{endRow} order by rn asc
+	</select>
+	<select id="selectAllMemberCount" resultType="int">
+		select count(*) from member where state!=9
+	</select>
+	<select id="selectAllMemberstateList" resultType="Memberstate">
+		select * from memberstate order by num
+	</select>
+</mapper>

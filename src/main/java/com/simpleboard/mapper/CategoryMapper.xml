@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.simpleboard.mapper.CategoryMapper">
+	<insert id="insertCategory">
+		<selectKey keyProperty="num" resultType="int" order="BEFORE">
+			select
+			categorySeq.nextval from dual
+		</selectKey>
+		insert into category values(
+			#{num}, #{name}, 1)
+	</insert>
+	<update id="updateCategory">
+		update category set name=#{name} where num=#{num}
+	</update>
+	<delete id="deleteCategory">
+		delete category where num=#{num}
+	</delete>
+	<select id="selectCategoryList" resultType = "Category">
+		select * from category order by num
+	</select>
+	<select id="selectCategoryNameByNum"  resultType = "String">
+		select name from category where num=#{num}
+	</select>
+	<select id="selectCategoryCount" resultType = "int">
+		select count(*) from category
+	</select>
+	<select id="selectCategoryByName" resultType = "Category">
+		select * from category where name=#{name}
+	</select>
+</mapper>

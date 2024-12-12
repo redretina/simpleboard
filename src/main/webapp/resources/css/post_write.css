@@ -1,0 +1,11 @@
+@charset "UTF-8";
+
+#btnArea {
+	margin-top: 0.5em;
+}
+
+#content {
+	height: 20em;
+	resize: none;
+	overflow-x: auto;
+}

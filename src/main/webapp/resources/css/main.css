@@ -1,0 +1,6 @@
+@charset "UTF-8";
+
+#banner {
+	background-image: url('../banner.webp');
+	background-repeat: round;
+} 

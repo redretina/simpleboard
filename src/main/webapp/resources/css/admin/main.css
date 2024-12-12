@@ -1,0 +1,33 @@
+@charset "UTF-8";
+
+#info_table {
+	margin: 0 auto;
+	text-align: center;
+}
+
+#info_table td {
+	padding: 0.5em;
+}
+
+#info_table .card {
+	width: 330px;
+	height: 300px;
+	font-weight: bold;
+}
+
+#info_table .card-header {
+	font-size: 1.6em;
+	text-align: center;
+}
+
+#info_table .list_area {
+	text-align: left;
+	font-size: 1.0em;
+	height: 140px;
+	margin-bottom: 1.0em;
+}
+
+#info_table .button_area {
+	text-align: center;
+	height: 30px;
+}
